@@ -7,22 +7,6 @@ import axios, {
 import { inject, injectable } from "inversify";
 import Config from "../Modules/Config";
 
-export interface HttpProviderResponseFail {
-  success: false;
-  status: number;
-  error?: string | Record<string, unknown>;
-}
-
-export interface HttpProviderResponseSuccess<T> {
-  success: true;
-  status: number;
-  data: T;
-}
-
-export type HttpProviderResponse<T> =
-  | HttpProviderResponseSuccess<T>
-  | HttpProviderResponseFail;
-
 @injectable()
 export default class HttpProvider {
   private _httpInstance: AxiosInstance;
@@ -43,24 +27,14 @@ export default class HttpProvider {
 
   private async interceptorResponseSuccess(
     response: AxiosResponse<Record<string, unknown>, InternalAxiosRequestConfig>
-  ): Promise<AxiosResponse<HttpProviderResponse<unknown>>> {
-    const success = response.status >= 200 && response.status < 300;
-    return {
-      ...response,
-      data: {
-        success,
-        status: response.status,
-        data: response.data,
-      },
-    };
+  ) {
+    return response;
   }
   private async interceptorResponseError(
     error: AxiosError<Record<string, unknown>>
-  ): Promise<HttpProviderResponse<unknown>> {
+  ) {
     return {
-      success: false,
-      status: error.response?.status || 500,
-      error: error.response?.data || "Server error",
+      data: error.response?.data || "Server error",
     };
   }
 
@@ -73,33 +47,24 @@ export default class HttpProvider {
     return error;
   }
 
-  async get<T>(
-    endpoint: string,
-    query?: Record<string, unknown>
-  ): Promise<HttpProviderResponse<T>> {
-    return this._httpInstance.get(endpoint, {
+  async get<T>(endpoint: string, query?: Record<string, unknown>) {
+    return this._httpInstance.get<T>(endpoint, {
       params: query,
     });
   }
-  async post<T, Y>(
-    endpoint: string,
-    body: Y
-  ): Promise<HttpProviderResponse<T>> {
-    return this._httpInstance.post(endpoint, body);
+  async post<T, Y>(endpoint: string, body: Y) {
+    return this._httpInstance.post<T>(endpoint, body);
   }
 
-  async put<T, Y>(endpoint: string, body: Y): Promise<HttpProviderResponse<T>> {
-    return this._httpInstance.put(endpoint, body);
+  async put<T, Y>(endpoint: string, body: Y) {
+    return this._httpInstance.put<T>(endpoint, body);
   }
 
-  async patch<T>(
-    endpoint: string,
-    body: Record<string, unknown>
-  ): Promise<HttpProviderResponse<T>> {
-    return this._httpInstance.patch(endpoint, body);
+  async patch<T>(endpoint: string, body: Record<string, unknown>) {
+    return this._httpInstance.patch<T>(endpoint, body);
   }
 
-  async del<T>(endpoint: string): Promise<HttpProviderResponse<T>> {
-    return this._httpInstance.delete(endpoint);
+  async del<T>(endpoint: string) {
+    return this._httpInstance.delete<T>(endpoint);
   }
 }

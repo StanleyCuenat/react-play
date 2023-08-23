@@ -1,2 +1,5 @@
 export * from "./Post.interface";
-export { PostRepository } from "./Post.repository";
+import PostRepository from "./Post.repository";
+import Post from "./Post";
+
+export { Post, PostRepository };

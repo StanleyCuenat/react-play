@@ -1,4 +1,6 @@
-export interface Post {
+import { RepositoryResponse } from "../HttpResponse.interface";
+
+export interface IPost {
   userId: number;
   id: number;
   title: string;
@@ -11,9 +13,9 @@ export interface PostDto {
 }
 
 export interface IPostRepository {
-  list(): Promise<Post[]>;
-  get(id: string): Promise<Post>;
-  create(dto: PostDto): Promise<Post>;
-  update(id: string, dto: PostDto): Promise<Post>;
-  del(id: string): Promise<Post>;
+  list(): Promise<RepositoryResponse<IPost[]>>;
+  get(id: string): Promise<RepositoryResponse<IPost>>;
+  create(dto: PostDto): Promise<RepositoryResponse<IPost>>;
+  update(id: string, dto: PostDto): Promise<RepositoryResponse<IPost>>;
+  del(id: string): Promise<RepositoryResponse<IPost>>;
 }
