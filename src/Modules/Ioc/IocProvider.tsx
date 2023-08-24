@@ -5,7 +5,7 @@ interface IocProviderProps {
   container: Container;
 }
 
-export const IocContext = createContext<Container | undefined>(undefined);
+export const IocContext = createContext<Container>(new Container());
 
 export default function IocProvider(
   props: PropsWithChildren<IocProviderProps>

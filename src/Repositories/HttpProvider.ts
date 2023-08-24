@@ -33,6 +33,7 @@ export default class HttpProvider {
   private async interceptorResponseError(
     error: AxiosError<Record<string, unknown>>
   ) {
+    // add your main logic for handling UNAUTHENTICATED / NOT AUTHORIZED / MAINTENANCE ERROR code here
     return {
       data: error.response?.data || "Server error",
     };
@@ -60,7 +61,7 @@ export default class HttpProvider {
     return this._httpInstance.put<T>(endpoint, body);
   }
 
-  async patch<T>(endpoint: string, body: Record<string, unknown>) {
+  async patch<T, Y>(endpoint: string, body: Y) {
     return this._httpInstance.patch<T>(endpoint, body);
   }
 

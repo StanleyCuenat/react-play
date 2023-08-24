@@ -1,3 +1,3 @@
-import { useIocContainer } from "./useIocContainer";
+import { useInjection } from "./hook";
 
-export default useIocContainer;
+export { useInjection };
