@@ -48,7 +48,7 @@ export default class HttpProvider {
     return error;
   }
 
-  async get<T>(endpoint: string, query?: Record<string, unknown>) {
+  async get<T, Y>(endpoint: string, query?: Y) {
     return this._httpInstance.get<T>(endpoint, {
       params: query,
     });

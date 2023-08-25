@@ -4,7 +4,6 @@ import { RouterProvider } from "react-router-dom";
 import router from "./Router";
 
 function App() {
-  console.log("APP LOADED");
   return (
     <IocProvider container={IocContainer.getInstance()}>
       <RouterProvider router={router} />

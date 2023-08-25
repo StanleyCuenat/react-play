@@ -7,6 +7,7 @@ import { PostListStore } from "../../Features/PostList/Store";
 import { PostDetailStore } from "../../Features/PostDetail/Store";
 import { AuthenticationRepository } from "../../Repositories/Authentication";
 import { AuthStore } from "../Auth/AuthStore";
+import { LocalStorage } from "../LocalStorage/LocalStorage";
 
 const IocContainer = (function () {
   let instance: Container | undefined;
@@ -26,6 +27,7 @@ const IocContainer = (function () {
       .toSelf()
       .inSingletonScope();
     container.bind<AuthStore>(AuthStore).toSelf().inSingletonScope();
+    container.bind<LocalStorage>(LocalStorage).toSelf().inSingletonScope();
     return container;
   };
 

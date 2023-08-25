@@ -9,7 +9,7 @@ interface PostCardProps {
 const PostCardItem = observer(({ post }: PostCardProps) => {
   return (
     <div>
-      <Link to={`/posts/${post.id}`} state={post}>
+      <Link to={`/posts/${post.id}`}>
         <h1>{post.title}</h1>
       </Link>
       <p>{post.body}</p>
