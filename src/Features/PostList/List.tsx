@@ -1,29 +1,38 @@
-import { observer } from "mobx-react-lite";
-import { PostListStore } from "./Store";
 import PostCardItem from "./Components/PostCardItem";
-import { action } from "mobx";
-import { useInjection } from "../../Modules/Ioc";
-import { useEffect } from "react";
 
-const PostList = observer(() => {
-  const postStore = useInjection<PostListStore>(PostListStore);
+import { useInjection } from "../../Modules/Ioc";
+import { PostListStore } from "./PostList.store";
+import { useAppDispatch, useAppSelector } from "../../Stores";
+import { useCallback, useEffect, useState } from "react";
+
+export default function PostList() {
+  const postListStore = useInjection<PostListStore>(PostListStore);
+  const postIds = useAppSelector(postListStore.getList());
+  const canLoadMore = useAppSelector(postListStore.getCanLoadMore());
+  const [loading, setLoading] = useState(false);
+  const dispatch = useAppDispatch();
+
+  const fetchPost = useCallback(async () => {
+    setLoading(true);
+    await dispatch(postListStore.fetch());
+    setLoading(false);
+  }, [dispatch, postListStore]);
 
   useEffect(() => {
-    if (postStore.posts.length <= 0) {
-      postStore.loadPost();
+    if (postIds.length <= 0) {
+      fetchPost();
     }
-  }, [postStore]);
+  }, [fetchPost, postIds]);
 
   return (
     <div>
-      {postStore.posts.map((post) => (
-        <PostCardItem post={post} key={post.id} />
+      {postIds.map((postId) => (
+        <PostCardItem postId={postId} key={postId} />
       ))}
-      {postStore.loading === false && postStore.canLoadMore === true && (
-        <button onClick={action(() => postStore.loadPost())}>loadMore</button>
+      {loading === false && canLoadMore === true && (
+        <button onClick={() => fetchPost()}>loadMore</button>
       )}
-      {postStore.loading === true && <div>loading...</div>}
+      {loading === true && <div>loading...</div>}
     </div>
   );
-});
-export default PostList;
+}

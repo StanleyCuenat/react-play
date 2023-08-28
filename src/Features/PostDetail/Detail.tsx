@@ -1,7 +1,3 @@
-import { observer } from "mobx-react-lite";
-
-const PostDetail = observer(() => {
+export default function PostDetail() {
   return <div></div>;
-});
-
-export default PostDetail;
+}

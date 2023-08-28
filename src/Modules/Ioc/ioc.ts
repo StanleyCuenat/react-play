@@ -3,11 +3,11 @@ import { Container } from "inversify";
 import HttpProvider from "../../Repositories/HttpProvider";
 import Config from "../Config";
 import { PostRepository } from "../../Repositories/Post";
-import { PostListStore } from "../../Features/PostList/Store";
-import { PostDetailStore } from "../../Features/PostDetail/Store";
 import { AuthenticationRepository } from "../../Repositories/Authentication";
 import { AuthStore } from "../Auth/AuthStore";
 import { LocalStorage } from "../LocalStorage/LocalStorage";
+import { PostStore } from "../../Stores/Post.store";
+import { PostListStore } from "../../Features/PostList/PostList.store";
 
 const IocContainer = (function () {
   let instance: Container | undefined;
@@ -21,11 +21,8 @@ const IocContainer = (function () {
       .bind<AuthenticationRepository>(AuthenticationRepository)
       .toSelf()
       .inSingletonScope();
+    container.bind<PostStore>(PostStore).toSelf().inSingletonScope();
     container.bind<PostListStore>(PostListStore).toSelf().inSingletonScope();
-    container
-      .bind<PostDetailStore>(PostDetailStore)
-      .toSelf()
-      .inSingletonScope();
     container.bind<AuthStore>(AuthStore).toSelf().inSingletonScope();
     container.bind<LocalStorage>(LocalStorage).toSelf().inSingletonScope();
     return container;

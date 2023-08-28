@@ -1,12 +1,15 @@
-import { observer } from "mobx-react-lite";
-import { Post } from "../../../Repositories/Post";
 import { Link } from "react-router-dom";
+import { useInjection } from "../../../Modules/Ioc";
+import { PostStore } from "../../../Stores/Post.store";
+import { useAppSelector } from "../../../Stores";
 
 interface PostCardProps {
-  post: Post;
+  postId: number;
 }
 
-const PostCardItem = observer(({ post }: PostCardProps) => {
+export default function PostCardItem({ postId }: PostCardProps) {
+  const postStore = useInjection<PostStore>(PostStore);
+  const post = useAppSelector(postStore.getPost(postId));
   return (
     <div>
       <Link to={`/posts/${post.id}`}>
@@ -15,6 +18,4 @@ const PostCardItem = observer(({ post }: PostCardProps) => {
       <p>{post.body}</p>
     </div>
   );
-});
-
-export default PostCardItem;
+}
