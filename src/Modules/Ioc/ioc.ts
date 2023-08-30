@@ -4,7 +4,7 @@ import HttpProvider from "../../Repositories/HttpProvider";
 import Config from "../Config";
 import { PostRepository } from "../../Repositories/Post";
 import { AuthenticationRepository } from "../../Repositories/Authentication";
-import { AuthStore } from "../Auth/AuthStore";
+import { AuthStore } from "../Auth/Auth.store";
 import { LocalStorage } from "../LocalStorage/LocalStorage";
 import { PostStore } from "../../Stores/Post.store";
 import { PostListStore } from "../../Features/PostList/PostList.store";

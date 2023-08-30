@@ -1,12 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import PostList from "./Features/PostList/List";
-import PostDetail from "./Features/PostDetail/Detail";
+import PostDetail from "./Features/PostDetail/PostDetail";
 import MainLayout from "./Layouts/MainLayout";
 import Error from "./Features/Error/Error";
 import AuthenticationLayout from "./Layouts/AuthenticationLayout";
 import Login from "./Features/Authentication/Login";
 import IocContainer from "./Modules/Ioc/ioc";
-import { AuthStore } from "./Modules/Auth/AuthStore";
+import { AuthStore } from "./Modules/Auth/Auth.store";
 
 async function rootLoader() {
   const authStore = IocContainer.getInstance().get<AuthStore>(AuthStore);

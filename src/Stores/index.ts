@@ -4,9 +4,11 @@ import IocContainer from "../Modules/Ioc/ioc";
 import { PostStore } from "./Post.store";
 import { PostListStore } from "../Features/PostList/PostList.store";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { AuthStore } from "../Modules/Auth/Auth.store";
 
 export const store = configureStore({
   reducer: {
+    auth: IocContainer.getInstance().get<AuthStore>(AuthStore).getReducer(),
     post: IocContainer.getInstance().get<PostStore>(PostStore).getReducer(),
     postList: IocContainer.getInstance()
       .get<PostListStore>(PostListStore)
