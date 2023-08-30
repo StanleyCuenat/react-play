@@ -13,7 +13,7 @@ export default function PostCardItem({ postId }: PostCardProps) {
   return (
     <div>
       <Link to={`/posts/${post.id}`}>
-        <h1>{post.title}</h1>
+        <h1 className="text-3xl font-bold underline">{post.title}</h1>
       </Link>
       <p>{post.body}</p>
     </div>

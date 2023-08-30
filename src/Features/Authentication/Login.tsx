@@ -3,6 +3,7 @@ import { useInjection } from "../../Modules/Ioc";
 import { AuthStore } from "../../Modules/Auth/Auth.store";
 import { Navigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../Stores";
+import Input from "../../Components/Systems/Input";
 
 // fake authentication with dummyjson.com
 // username: 'kminchelle',
@@ -22,15 +23,17 @@ export default function Login() {
 
   return (
     <div>
-      <input
+      <Input
         type="text"
         value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        onChange={setUsername}
+        placeholder="username"
       />
-      <input
+      <Input
         type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        value={username}
+        onChange={setPassword}
+        placeholder="password"
       />
       <button
         disabled={loading}

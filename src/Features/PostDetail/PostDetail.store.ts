@@ -6,5 +6,6 @@ export class PostDetailStore {
   private readonly _postRepository: PostRepository;
   constructor(@inject(PostRepository) postRepository: PostRepository) {
     this._postRepository = postRepository;
+    console.log(this._postRepository);
   }
 }

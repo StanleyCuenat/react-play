@@ -7,10 +7,11 @@ import AuthenticationLayout from "./Layouts/AuthenticationLayout";
 import Login from "./Features/Authentication/Login";
 import IocContainer from "./Modules/Ioc/ioc";
 import { AuthStore } from "./Modules/Auth/Auth.store";
+import { store } from "./Stores";
 
 async function rootLoader() {
   const authStore = IocContainer.getInstance().get<AuthStore>(AuthStore);
-  await authStore.authenticateFromLocaleStorage();
+  await store.dispatch(authStore.authenticateFromLocaleStorage());
   return null;
 }
 
