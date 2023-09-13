@@ -1,9 +1,9 @@
 import PostCardItem from "./Components/PostCardItem";
 
 import { useInjection } from "../../Modules/Ioc";
-import { PostListStore } from "./PostList.store";
 import { useAppDispatch, useAppSelector } from "../../Stores";
 import { useCallback, useEffect, useState } from "react";
+import { PostListStore } from "./PostList.store";
 
 export default function PostList() {
   const postListStore = useInjection<PostListStore>(PostListStore);

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useInjection } from "../../../Modules/Ioc";
-import { PostStore } from "../../../Stores/Post.store";
 import { useAppSelector } from "../../../Stores";
+import { PostStore } from "../../../Stores/Post.store";
 
 interface PostCardProps {
   postId: number;

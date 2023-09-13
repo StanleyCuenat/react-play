@@ -1,9 +1,8 @@
-import IocProvider from "./Modules/Ioc/IocProvider";
-import IocContainer from "./Modules/Ioc/ioc";
 import { RouterProvider } from "react-router-dom";
 import router from "./Router";
 import { Provider } from "react-redux";
 import { store } from "./Stores";
+import { IocProvider, IocContainer } from "./Modules/Ioc";
 
 function App() {
   return (

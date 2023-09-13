@@ -51,7 +51,7 @@ export default class PostRepository implements IPostRepository {
     };
   }
 
-  async get(id: string): Promise<RepositoryResponse<Post>> {
+  async get(id: number): Promise<RepositoryResponse<Post>> {
     const result = await this._httpProvider.get<Post, undefined>(
       `/posts/${id}`
     );
@@ -63,7 +63,7 @@ export default class PostRepository implements IPostRepository {
     return this.formatResponse(result);
   }
 
-  async update(id: string, dto: PostDto): Promise<RepositoryResponse<Post>> {
+  async update(id: number, dto: PostDto): Promise<RepositoryResponse<Post>> {
     const result = await this._httpProvider.put<Post, PostDto>(
       `/posts/${id}`,
       dto
@@ -71,7 +71,7 @@ export default class PostRepository implements IPostRepository {
     return this.formatResponse(result);
   }
 
-  async del(id: string): Promise<RepositoryResponse<Post>> {
+  async del(id: number): Promise<RepositoryResponse<Post>> {
     const result = await this._httpProvider.del<Post>(`/posts/${id}`);
     return this.formatResponse(result);
   }

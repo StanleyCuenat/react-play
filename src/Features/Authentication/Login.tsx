@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useInjection } from "../../Modules/Ioc";
-import { AuthStore } from "../../Modules/Auth/Auth.store";
 import { Navigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../Stores";
-import Input from "../../Components/Systems/Input";
+import { Input } from "../../Components/Systems";
+import { AuthStore } from "../../Modules/Auth/Auth.store";
 
 // fake authentication with dummyjson.com
 // username: 'kminchelle',
@@ -16,6 +16,10 @@ export default function Login() {
   const dispatch = useAppDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const onLogin = async () => {
+    await dispatch(authStore.logIn({ username, password }));
+  };
 
   if (authenticatedUser !== undefined) {
     return <Navigate to="/posts/" />;
@@ -31,14 +35,11 @@ export default function Login() {
       />
       <Input
         type="password"
-        value={username}
+        value={password}
         onChange={setPassword}
         placeholder="password"
       />
-      <button
-        disabled={loading}
-        onClick={() => dispatch(authStore.logIn({ username, password }))}
-      >
+      <button disabled={loading} onClick={onLogin}>
         login
       </button>
     </div>

@@ -19,8 +19,8 @@ export interface PostListQueryDto {
 
 export interface IPostRepository {
   list(queryDto: PostListQueryDto): Promise<RepositoryResponse<Post[]>>;
-  get(id: string): Promise<RepositoryResponse<Post>>;
+  get(id: number): Promise<RepositoryResponse<Post>>;
   create(dto: PostDto): Promise<RepositoryResponse<Post>>;
-  update(id: string, dto: PostDto): Promise<RepositoryResponse<Post>>;
-  del(id: string): Promise<RepositoryResponse<Post>>;
+  update(id: number, dto: PostDto): Promise<RepositoryResponse<Post>>;
+  del(id: number): Promise<RepositoryResponse<Post>>;
 }
