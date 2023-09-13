@@ -6,11 +6,12 @@ import {
   RESPONSE_STATUS,
   RepositoryResponse,
 } from "../../../Core/Http/Http.interface";
+import { IOC_CORE_TYPE } from "../../../Core/Ioc/ioc.type";
 
 @injectable()
 export class HttpProductRepository implements ProductRepository {
   private readonly _httpAdapter: HttpAdapter;
-  constructor(@inject(HttpAdapter) httpAdapter: HttpAdapter) {
+  constructor(@inject(IOC_CORE_TYPE.HttpAdapter) httpAdapter: HttpAdapter) {
     this._httpAdapter = httpAdapter;
   }
 

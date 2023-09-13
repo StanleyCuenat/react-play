@@ -6,7 +6,7 @@ import axios, {
 } from "axios";
 import { inject, injectable } from "inversify";
 import { Config } from "../Config/Config";
-import { IOC_TYPE } from "../Ioc/ioc";
+import IOC_TYPE from "../Ioc/ioc.type";
 
 @injectable()
 export default class HttpAdapter {

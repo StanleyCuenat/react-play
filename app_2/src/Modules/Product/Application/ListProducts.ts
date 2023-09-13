@@ -1,8 +1,8 @@
 import { inject, injectable } from "inversify";
-import { IOC_TYPE } from "../../../Core/Ioc/ioc";
 import type { ProductRepository } from "../Domain/Product.repository";
 import UseCase from "../../../Core/UseCase/UseCase.interface";
 import { RESPONSE_STATUS } from "../../../Core/Http/Http.interface";
+import IOC_TYPE from "../../../Core/Ioc/ioc.type";
 
 @injectable()
 export class ListProductUseCase implements UseCase {
