@@ -7,6 +7,8 @@ import { ListProductUseCase } from "../../Modules/Product/Application/ListProduc
 import { Config } from "../Config/Config";
 import IOC_TYPE from "./ioc.type";
 import ProductListController from "../../Modules/Product/Controller/ProductList.controller";
+import { ProductDetailUseCase } from "../../Modules/Product/Application/ProductDetails";
+import ProductDetailController from "../../Modules/Product/Controller/ProductDetails.controller";
 
 const IocContainer = (function () {
   let instance: Container | undefined;
@@ -30,8 +32,15 @@ const IocContainer = (function () {
       .bind<ListProductUseCase>(IOC_TYPE.ListProductUseCase)
       .to(ListProductUseCase);
     container
+      .bind<ProductDetailUseCase>(IOC_TYPE.ProductDetailUseCase)
+      .to(ProductDetailUseCase);
+    container
       .bind<ProductListController>(IOC_TYPE.ProductListController)
-      .to(ProductListController);
+      .to(ProductListController)
+      .inSingletonScope();
+    container
+      .bind<ProductDetailController>(IOC_TYPE.ProductDetailController)
+      .to(ProductDetailController);
     return container;
   };
 

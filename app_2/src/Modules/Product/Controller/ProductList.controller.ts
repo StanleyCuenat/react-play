@@ -10,6 +10,7 @@ export default class ProductListController {
   private _pageNumber = 1;
   private _loading = false;
   private _canLoadMore = true;
+  private _error: number | undefined = undefined;
   private PAGE_SIZE = 10;
   constructor(
     @inject(IOC_USE_CASE_TYPE.ListProductUseCase)
@@ -34,7 +35,7 @@ export default class ProductListController {
     );
     this._loading = false;
     if (typeof data === "number") {
-      console.log("an error happened on the server side");
+      this._error = data;
       return;
     }
     if (data.length === 0) {
@@ -60,5 +61,9 @@ export default class ProductListController {
 
   getCanLoadMore() {
     return this._canLoadMore;
+  }
+
+  getError() {
+    return this._error;
   }
 }

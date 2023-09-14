@@ -15,7 +15,7 @@ export class HttpProductRepository implements ProductRepository {
     this._httpAdapter = httpAdapter;
   }
 
-  async get(id: number) {
+  async get(id: string) {
     const result = await this._httpAdapter.get<Product, unknown>(
       `/products/${id}`
     );

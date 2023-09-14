@@ -10,19 +10,27 @@ export default function ProductList() {
   );
   const [loading, setLoading] = useState(false);
   const [canLoadMore, setCanLoadMore] = useState(controller.getCanLoadMore());
-  const [products, setProducts] = useState<string[]>([]);
+  const [error, setError] = useState(controller.getError());
+  const [products, setProducts] = useState<string[]>(controller.getIds());
 
   const fetchProduct = useCallback(async () => {
     setLoading(true);
     await controller.getProducts();
     setProducts(controller.getIds());
     setCanLoadMore(controller.getCanLoadMore());
+    setError(controller.getError());
     setLoading(false);
   }, [controller]);
 
   useEffect(() => {
-    fetchProduct();
-  }, [fetchProduct]);
+    if (products.length <= 0) {
+      fetchProduct();
+    }
+  }, [fetchProduct, products.length]);
+
+  if (error !== undefined) {
+    return <p>oops something wrong happen</p>;
+  }
 
   if (loading && products.length === 0) {
     return <p>...loading...</p>;
@@ -30,10 +38,10 @@ export default function ProductList() {
 
   return (
     <div>
-      {products.map((product) => (
+      {products.map((productId) => (
         <ProductListItem
-          key={controller.getProduct(product).id}
-          product={controller.getProduct(product)}
+          key={productId}
+          product={controller.getProduct(productId)}
         />
       ))}
       {!loading && canLoadMore && (

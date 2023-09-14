@@ -8,10 +8,12 @@ const IOC_CORE_TYPE = {
 
 const IOC_USE_CASE_TYPE = {
   ListProductUseCase: Symbol("ListProductUseCase"),
+  ProductDetailUseCase: Symbol("ProductDetailUseCase"),
 };
 
 const IOC_CONTROLLER_TYPE = {
   ProductListController: Symbol("ProductListController"),
+  ProductDetailController: Symbol("ProductDetailController"),
 };
 
 const IOC_TYPE = {
