@@ -36,11 +36,11 @@ export class HttpProductRepository implements ProductRepository {
 
   async list(pageNumber: number, pageSize: number) {
     const _pageNumber = pageNumber >= 1 ? pageNumber : 0;
-    const offset = (_pageNumber - 1) * pageSize;
+    const skip = (_pageNumber - 1) * pageSize;
     const result = await this._httpAdapter.get<
       { products: Product[] },
-      { limit: number; offset: number }
-    >("/products", { limit: pageSize, offset });
+      { limit: number; skip: number }
+    >("/products", { limit: pageSize, skip });
     if (result.status >= 200 && result.status < 300) {
       const response: RepositoryResponse<Product[]> = {
         status: RESPONSE_STATUS.OK,

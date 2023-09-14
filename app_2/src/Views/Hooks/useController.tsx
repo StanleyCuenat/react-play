@@ -3,7 +3,7 @@ import { IocContext } from "../Providers/IocProvider";
 
 export type Newable<T> = new (...args: never[]) => T;
 
-export function useCase<T>(symbol: symbol) {
+export function useController<T>(symbol: symbol) {
   const containerContext = useContext(IocContext);
   return useMemo(() => {
     return containerContext.get<T>(symbol);

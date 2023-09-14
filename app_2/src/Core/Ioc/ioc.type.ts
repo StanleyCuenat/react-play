@@ -10,10 +10,15 @@ const IOC_USE_CASE_TYPE = {
   ListProductUseCase: Symbol("ListProductUseCase"),
 };
 
+const IOC_CONTROLLER_TYPE = {
+  ProductListController: Symbol("ProductListController"),
+};
+
 const IOC_TYPE = {
   ...IOC_CORE_TYPE,
   ...IOC_USE_CASE_TYPE,
+  ...IOC_CONTROLLER_TYPE,
 };
 
-export { IOC_CORE_TYPE, IOC_USE_CASE_TYPE };
+export { IOC_CORE_TYPE, IOC_USE_CASE_TYPE, IOC_CONTROLLER_TYPE };
 export default IOC_TYPE;

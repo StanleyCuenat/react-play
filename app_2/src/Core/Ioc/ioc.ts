@@ -6,6 +6,7 @@ import { HttpProductRepository } from "../../Modules/Product/Infra/HttpProduct.r
 import { ListProductUseCase } from "../../Modules/Product/Application/ListProducts";
 import { Config } from "../Config/Config";
 import IOC_TYPE from "./ioc.type";
+import ProductListController from "../../Modules/Product/Controller/ProductList.controller";
 
 const IocContainer = (function () {
   let instance: Container | undefined;
@@ -28,6 +29,9 @@ const IocContainer = (function () {
     container
       .bind<ListProductUseCase>(IOC_TYPE.ListProductUseCase)
       .to(ListProductUseCase);
+    container
+      .bind<ProductListController>(IOC_TYPE.ProductListController)
+      .to(ProductListController);
     return container;
   };
 
